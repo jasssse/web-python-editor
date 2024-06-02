@@ -1,2 +1,2 @@
 # web-python-editor
-Web-bases Python3 editor + execution for Datacurve OA
+Web-based Python3 editor + execution for Datacurve OA
