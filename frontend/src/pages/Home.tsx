@@ -59,6 +59,7 @@ export default function Home() {
 
     return (
         <div className='flex flex-row p-4 w-screen h-screen'>
+            {/* Main area */}
             <div className='flex flex-col p-4 w-9/12'>
                 <div className='flex flex-row pt-4 justify-between'>
                     <h1 className='text-2xl font-bold mb-4'>Python Code Executor</h1>
@@ -68,18 +69,22 @@ export default function Home() {
                     </div>
                    
                 </div>
+
+                {/* Editor */}
                 <CodeEditor code={code} setCode={setCode} />
+
+                {/* Output */}
                 <div className='flex flex-col h-1/3'>
                     <h1 className='text-2xl font-bold pt-4'>Output</h1>
                     <pre className= {"mt-4 p-4 border rounded-md h-full text-sm" + (status == 'error' ? 'border-red-500 text-red-500' : 'border-slate-500')}>{output}</pre>
                 </div>
                 
             </div>
+
+            {/* Previously submitted entries */}
             <div className='w-4/12'>
                 <CodeList codes={codeList} setCode={setCode} />
             </div>
-            
         </div>
-
     )
 }
