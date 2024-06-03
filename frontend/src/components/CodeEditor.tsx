@@ -14,7 +14,7 @@ export default function CodeEditor({ code, setCode }: CodeEditorProps) {
     return (
         <Editor
             value={code}
-            className='outline'
+            className='h-full border rounded-md'
             onValueChange={setCode}
             highlight={code => highlight(code, languages.python, 'python')}
             padding={10}
