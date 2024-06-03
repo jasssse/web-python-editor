@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-import models, schemas
+from . import models, schemas
 
 def create_code(db: Session, code: schemas.CodeCreate):
     db_code = models.Code(code=code.code, output=code.output)
