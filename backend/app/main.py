@@ -2,7 +2,6 @@ from fastapi import FastAPI, HTTPException, Depends
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 import subprocess
-import sqlite3
 from sqlalchemy.orm import Session
 from typing import List
 from database import engine, Base, SessionLocal
@@ -29,6 +28,7 @@ class CodeResponse(BaseModel):
 def get_session_local():
     yield SessionLocal()
 
+# Test code endpoint: allow users to test their code first
 @app.post("/api/test_code", response_model=CodeResponse)
 async def test_code(request: CodeRequest):
     try:
@@ -42,7 +42,8 @@ async def test_code(request: CodeRequest):
         return CodeResponse(output=output)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-    
+
+# Submit code: check for errors, persist to DB
 @app.post("/api/submit_code", response_model=CodeResponse)
 async def submit_code(request: CodeRequest):
     try:
@@ -61,7 +62,7 @@ async def submit_code(request: CodeRequest):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
     
-
+# Fetch all submitted codes to display
 @app.get("/api/codes", response_model=List[schemas.Code])
 async def read_codes(skip: int = 0, limit: int = 100, db: Session = Depends(get_session_local)):
     print(f"Skip: {skip}, Limit: {limit}")
